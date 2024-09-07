@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.request.UserCreationRequest;
+import com.example.demo.dto.request.UserUpdateRequest;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,17 @@ public class UserController {
     @GetMapping("/{userId}")
     User getUser(@PathVariable("userId") String userId) {
         return userService.getUser(userId);
+    }
+
+    @PutMapping("/{userId}")
+    User updateUser(@PathVariable("userId") String userId, @RequestBody UserUpdateRequest request) {
+        return userService.updateUser(userId, request);
+    }
+
+    @DeleteMapping("/{userId}")
+    String deleteUser(@PathVariable("userId") String userId) {
+        userService.deleteUser(userId);
+        return "User has been deleted successfully";
     }
 
 }
